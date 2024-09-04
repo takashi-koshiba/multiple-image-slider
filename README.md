@@ -1,4 +1,5 @@
 # multiple-image-slider
+<img src="https://raw.githubusercontent.com/takashi-koshiba/multiple-image-slider/src/%E3%82%AD%E3%83%A3%E3%83%97%E3%83%81%E3%83%A3.PNG">
 <h1>特徴</h1>
 <p>横スクロールの画像スライダーです。<br>
     パフォーマンスを優先しており、大量の画像がある場合でもすべての画像は読み込みは行いません。<br>
@@ -7,4 +8,6 @@
     こうすることでメモリの削減とページの読み込み時間の短縮につながります。
 
 </p>
+
+<a href="https://takashi-koshiba.github.io/multiple-image-slider/">ここからデモの確認ができます。</a>
 
