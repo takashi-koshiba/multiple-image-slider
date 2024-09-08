@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	let pages=2;
 	let initImgCount=ImgCount*pages+2;
 	let imgRootUrl;
-	let imgData;
+	let imgDatas;
 	let calculateLayoutTimer;
 
 	let root="https://raw.githubusercontent.com/takashi-koshiba/multiple-image-slider/src/";
@@ -79,10 +79,22 @@ document.addEventListener("DOMContentLoaded",function(){
   { originalName: "56" },
 
 ]
+let result2=[
+	{ originalName: "1" },
+	{ originalName: "2" },
+	{ originalName: "3" },
+	{ originalName: "4" },
+	{ originalName: "5" },
+	{ originalName: "6" },
+	{ originalName: "7" },
+	{ originalName: "8" }
+]
+
+
 
 		imgRootUrl= url;
-		imgData=result;
-		console.dir(imgData);
+		imgDatas=[result,result2];
+		console.dir(imgDatas);
 		
 
 		//スライダーの数だけ実行
@@ -94,12 +106,12 @@ document.addEventListener("DOMContentLoaded",function(){
 			}
 			
 			
-			setElements(imgData,initImgCount,imgRootUrl,rankIndex,margin);
-			addScrollEvents(rank[rankIndex].children[1],anime_childW,rankObj[rankIndex],initImgCount,imgRootUrl);
+			setElements(imgDatas[rankIndex],initImgCount,imgRootUrl,rankIndex,margin);
+			addScrollEvents(rank[rankIndex].children[1],anime_childW,rankObj[rankIndex],initImgCount,imgRootUrl,imgDatas[rankIndex]);
 			
 			//左ボタン
 			rank[rankIndex].children[0].addEventListener('click',function(){
-				buttonEvent(1,rank[rankIndex].children[1],rankWidth,rankObj[rankIndex],anime_childW,imgData,
+				buttonEvent(1,rank[rankIndex].children[1],rankWidth,rankObj[rankIndex],anime_childW,imgDatas[[rankIndex]],
 					imgRootUrl
 				);
 			})
@@ -107,7 +119,7 @@ document.addEventListener("DOMContentLoaded",function(){
 			//右ボタン
 			rank[rankIndex].children[2].addEventListener('click',function(){
 				
-				buttonEvent(-1,rank[rankIndex].children[1],rankWidth,rankObj[rankIndex],anime_childW,imgData,
+				buttonEvent(-1,rank[rankIndex].children[1],rankWidth,rankObj[rankIndex],anime_childW,imgDatas[rankIndex],
 					imgRootUrl
 				)
 			});
@@ -146,14 +158,14 @@ document.addEventListener("DOMContentLoaded",function(){
 			const rank_animeTemplate=document.getElementById('rank-animeTemplate');
 			for(let i=0;i<rank.length;i++){
 				
-				centering(rank[i].children[1],anime_childW,rankObj,initImgCount,imgData,imgRootUrl,rank_animeTemplate)
-				RangeToAddElem(rank[i].children[1],imgRootUrl,rank_animeTemplate,margin);
+				centering(rank[i].children[1],anime_childW,rankObj,initImgCount,imgDatas[i],imgRootUrl,rank_animeTemplate)
+				RangeToAddElem(rank[i].children[1],imgRootUrl,rank_animeTemplate,margin,imgDatas[i]);
 			}
 		},100);
 		
 	});
 	
-	function RangeToAddElem(rank_scroll,imgRootUrl,rank_animeTemplate,margin){
+	function RangeToAddElem(rank_scroll,imgRootUrl,rank_animeTemplate,margin,imgData){
 		let ImgCount=Math.floor(rankWidth/anime_childW);
 		let min=rankObj.index-ImgCount<0?0:rankObj.index-ImgCount;
 		let max=ImgCount*pages+rankObj.index;
@@ -169,7 +181,7 @@ document.addEventListener("DOMContentLoaded",function(){
 		initImgCount=ImgCount*pages+2;
 
 	}
-	function addScrollEvents(rank_scroll,anime_childW,rankObj,initImgCount,imgRootUrl){
+	function addScrollEvents(rank_scroll,anime_childW,rankObj,initImgCount,imgRootUrl,imgData){
 		const rank_animeTemplate=document.getElementById('rank-animeTemplate');
 		
 		let scrollTimeout;
